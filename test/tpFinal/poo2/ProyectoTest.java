@@ -13,10 +13,10 @@ class ProyectoTest {
 	@BeforeEach
 	public void sedUp(){
 		proyecto = new Proyecto("PoyectoPlantas", "Proyecto para investigar el cultivo de plantas");
-		usuario = new Usuario("Pepe");
+		usuario = new Usuario("Pepe", {"correr", "investigar"}, {"investigacion", "busqueda"}, {});
 		muestra = new Muestra(Pepe, 2020-10-08,16-48-10-00);
 	}
-	
+
 	@Test
 	void agregarMuestraTest() {
 		
