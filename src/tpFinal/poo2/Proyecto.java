@@ -11,6 +11,7 @@ public class Proyecto {
 	public Proyecto(String nombre, String descripcion) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.muestras = new ArrayList<Muestra>();
 	}
 
 	public String getNombre() {
