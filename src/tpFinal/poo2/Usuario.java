@@ -9,6 +9,7 @@ public class Usuario {
 	ArrayList<String> gustos;
 	ArrayList<String> preferencias;
 	ArrayList<String> comportamientos;
+	// map de usurario con un int 0 a 5
 	
 	public Usuario(String nombre, ArrayList<String> gustos,ArrayList<String> preferencias, 
 				   ArrayList<String> comportamientos) {
@@ -19,3 +20,11 @@ public class Usuario {
 	}
 	
 }
+
+
+
+// Composite
+/*PARA LA PARTE DE FILTROS DE LA APLICACION, EL OR, EL AND U LAS CATEGORIAS QUE EXCLUYA Y INCLUYA *
+ * 
+ * NECESITAMOS UN METODO FILTRAR/
+ */
