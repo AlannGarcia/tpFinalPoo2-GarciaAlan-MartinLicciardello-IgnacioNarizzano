@@ -4,25 +4,58 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DesafioDeUsuario {
-	private ArrayList<Muestra> cantMuestras;
-	private LocalDate fechaDeCompletacion;
+	Desafio desafio;
+	int cantidadMuestras = 0;
+	Voto voto = Voto.v;
+	EstadoDesafioUsuario estadoUsuario;
+	LocalDate fecha = null;
 	
-	public DesafioDeUsuario(ArrayList<Muestra> cantMuestras) {
-		this.cantMuestras = cantMuestras;
+	
+	public DesafioDeUsuario(Desafio desafio) {
+		this.desafio = desafio;
+		if(!desafio.desafioExpirado()) {
+			estadoUsuario = new EstadoDesafioUsuarioActivo();
+		}else {
+			estadoUsuario = new EstadoDesafioUsuarioInactivo();
+		}
 	}
 	
-	public boolean completoDesafio(Usuario usuario) {
-		//buscarMuestras que coincidan con esa
-		//return 
+	public int porcentajeDeCompletitud() {
+		return 100 - (desafio.cantidadMuestras - this.cantidadMuestras)/(desafio.cantidadMuestras)*100;       
+				
 	}
 	
-	public int porcentajeDeCompletitud(Usuario usuario) {
-		//comparar las muestras del usuario con estas
-		//return  
+	public void evaluarMuestra(Muestra muestra) throws Exception{
+		if(muestra.perteneceAlArea(desafio.area)) {
+			estadoUsuario.evaluarMuestra(muestra, this);
+		}
+	}
+     
+	public void evaluarMuestraEnEstadoActivo(Muestras muestra) {
+		if(this.desafio.desafioExpirado()) {
+			estadoUsuario = new EstadoDesafioUsuarioInactivo();
+		}else if(this.desafio.cantidadMuestras == cantidadMuestras + 1){
+			estadoUsuario = new EstadoDesafioUsuarioCompletado();
+			cantidadMuestras++;
+			fecha = LocalDate.now();
+		}else {
+			cantidadMuestras++;
+		}
 	}
 	
-	public void evaluarMuestra(Muestra muestra) {
-		//se fija si la muestra es compatible
-  
+	public boolean completoDesafio() {
+		return estadoUsuario.getClass() == EstadoDesafioUsuarioCompletado.class;
+ 	}
+	
+	public Desafio getDesafio() {
+		return desafio;
+	}
+	
+	public LocalDate getFechaCompletado() throws Exception{
+		try {
+			return fecha;
+		}catch(NullPointerException e) {
+			throw new Exception("El desafio no ha sido completado");
+		}
 	}
 }

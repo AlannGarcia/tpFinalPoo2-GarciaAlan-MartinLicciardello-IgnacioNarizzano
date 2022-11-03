@@ -8,17 +8,14 @@ public class Usuario {
 	String nombre;
 	List<Muestra> muestras = Arrays.asList();
 	List<Proyecto> proyectos = Arrays.asList();
-    Preferencias preferencias;
-	List<DesafioDeUsuario> desafios = Arrays.asList();
-	List<DesafioDeUsuario> gustosDesafios = Arrays.asList();
-	EstadoRecomendacion estadoRecomendacion = new EstadoFavoritos();
+    Preferencia preferencias;
+	List<DesafioDeUsuario> desafiosDeUsuario = Arrays.asList();
+	EstrategiaRecomendacion estadoRecomendacion = new EstrategiaFavoritos();
 	
-	// map de usurario con un int 0 a 5
 	
-	public Usuario(String nombre, Preferencias preferencias, List<DesafioDeUsuario> desafiosDeUsuario) {
+	public Usuario(String nombre, Preferencia preferencias) {
 		this.nombre = nombre;
 		this.preferencias = preferencias;
-		this.desafios = desafiosDeUsuario;
 	}
 
 	private List<DesafioDeUsuario> getGustosDesafios() {
@@ -31,7 +28,7 @@ public class Usuario {
 	
 	public List<Desafio> desafiosCompletos() {
 		
-		return desafios.stream().filter(d -> d.completoDesafio()).map(d -> d.getDesafio()).toList(); 
+		return desafiosDeUsuario.stream().filter(d -> d.completoDesafio()).map(d -> d.getDesafio()).toList(); 
 	}
 	
 	public int porcentajeCompletitud(Desafio d) {
