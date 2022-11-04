@@ -17,5 +17,7 @@ public class FiltroNot implements Filtro{
 		return proyectoDos;
 	}
 	
+	//resta de conjuntos a los proyectos dos, le resto proyectos filtrados
 	
+		//ej en titulo me va a traer algo que no incluya en el titulo
 }

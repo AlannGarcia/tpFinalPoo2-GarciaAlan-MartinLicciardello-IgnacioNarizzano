@@ -1,44 +1,38 @@
 package tpFinal.poo2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Proyecto {
 	String nombre;
 	String descripcion;
-	ArrayList<Muestra> muestras;
-	ArrayList<String>  categorias;
-	ArrayList<Desafio> desafios;
+	List<Muestra> muestras;
+	List<Categorias>  categorias;
+	List<Desafio> desafios;
+	List<Usuario> usuarios;
 	
-	public Proyecto(String nombre, String descripcion) {
+	public Proyecto(String nombre, String descripcion, List<Categorias> categorias) {
+		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.muestras = new ArrayList<Muestra>();
+		this.categorias = categorias;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public ArrayList<Muestra> getMuestras() {
-		return muestras;
-	}
-
+	
 	public void agregarMuestra(Muestra muestra) {
 		muestras.add(muestra);
 	}
 	
-	public void buscarMatch(ArrayList<Desafio> desafios) {
-	/*
-	 * compara la lista de desafios que recibe como parametro con la 
-	 * lista de desafios que ya tiene, y genera una nueva lista de 
-	 * desafíos para que sean los compatibles con ese proyecto para 
-	 * pasarle en limpio la lista la usario y que ahi haga el 
-	 * match el usuario
-	 * */
-		
+	
+	public void agregarUsuario(Usuario usuario) {
+		usuarios.add(usuario);
+		usuario.agregarProyecto(this);
 	}
+
+
+	public List<Desafio> getDesafios() {
+		return desafios;
+	}
+	
+	
 }

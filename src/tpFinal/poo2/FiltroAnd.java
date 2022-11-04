@@ -15,7 +15,7 @@ public class FiltroAnd implements Filtro{
 	
 	public List<Proyecto> filtrar(List<Proyecto> proyectos){
 		List<Proyecto> proyectoX = a.filtrar(proyectos);
-		proyectoX.retainAll(b.filtrar(proyectos));
+		proyectoX.retainAll(b.filtrar(proyectos)); //rainAll hace una interseccion 
 		return proyectoX;
 	}
 	

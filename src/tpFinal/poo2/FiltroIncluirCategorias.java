@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class FiltroIncluirCategorias implements Filtro{
-	List<Categoria> categorias;
+	List<Categorias> categorias;
 
-	public FiltroIncluirCategorias(List<Categoria> categorias) {
+	public FiltroIncluirCategorias(List<Categorias> categorias) {
 		super();
 		this.categorias = categorias;
 	}
