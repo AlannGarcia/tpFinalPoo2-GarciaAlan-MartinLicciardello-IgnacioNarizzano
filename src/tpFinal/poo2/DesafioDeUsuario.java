@@ -20,42 +20,46 @@ public class DesafioDeUsuario {
 		}
 	}
 	
-	public int porcentajeDeCompletitud() {
-		return 100 - (desafio.cantidadMuestras - this.cantidadMuestras)/(desafio.cantidadMuestras)*100;       
-				
-	}
 	
-	public void evaluarMuestra(Muestra muestra) throws Exception{
-		if(muestra.perteneceAlArea(desafio.area)) {
-			estadoUsuario.evaluarMuestra(muestra, this);
+		public boolean completoDesafio() {
+			return estadoUsuario.getClass() == EstadoDesafioUsuarioCompletado.class;
+	 	}
+		
+		
+		public int porcentajeDeCompletitud() {
+			return 100 - (desafio.cantidadMuestras - this.cantidadMuestras)/(desafio.cantidadMuestras)*100;       
+					
 		}
-	}
-     
-	public void evaluarMuestraEnEstadoActivo(Muestras muestra) {
-		if(this.desafio.desafioExpirado()) {
-			estadoUsuario = new EstadoDesafioUsuarioInactivo();
-		}else if(this.desafio.cantidadMuestras == cantidadMuestras + 1){
-			estadoUsuario = new EstadoDesafioUsuarioCompletado();
-			cantidadMuestras++;
-			fecha = LocalDate.now();
-		}else {
-			cantidadMuestras++;
+		
+		public void evaluarMuestra(Muestra muestra) throws Exception{
+			if(muestra.perteneceAlArea(desafio.area)) {
+				estadoUsuario.evaluarMuestra(muestra, this);
+			}
 		}
-	}
-	
-	public boolean completoDesafio() {
-		return estadoUsuario.getClass() == EstadoDesafioUsuarioCompletado.class;
- 	}
-	
-	public Desafio getDesafio() {
-		return desafio;
-	}
-	
-	public LocalDate getFechaCompletado() throws Exception{
-		try {
-			return fecha;
-		}catch(NullPointerException e) {
-			throw new Exception("El desafio no ha sido completado");
+	     
+		public void evaluarMuestraEnEstadoActivo(Muestra muestra) {
+			if(this.desafio.desafioExpirado()) {
+				estadoUsuario = new EstadoDesafioUsuarioInactivo();
+			}else if(this.desafio.cantidadMuestras == cantidadMuestras + 1){
+				estadoUsuario = new EstadoDesafioUsuarioCompletado();
+				cantidadMuestras++;
+				fecha = LocalDate.now();
+			}else {
+				cantidadMuestras++;
+			}
 		}
-	}
+		
+		
+		
+		public Desafio getDesafio() {
+			return desafio;
+		}
+		
+		public LocalDate getFechaCompletado() throws Exception{
+			try {
+				return fecha;
+			}catch(NullPointerException e) {
+				throw new Exception("El desafio no ha sido completado");
+			}
+		}
 }
