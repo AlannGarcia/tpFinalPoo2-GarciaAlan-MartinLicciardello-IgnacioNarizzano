@@ -3,7 +3,6 @@ package tpFinal.poo2;
 import java.time.LocalDate;
 
 public class Muestra {
-	//coordenada Pair o String como sea 
 	Usuario usuario;
 	LocalDate fecha;
 	Ubicacion ubicacion;
