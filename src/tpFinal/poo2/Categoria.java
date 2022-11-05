@@ -1,9 +1,9 @@
 package tpFinal.poo2;
 
-public class Categorias {
+public class Categoria {
 	private String nombre;
 
-	public Categorias(String nombre) {
+	public Categoria(String nombre) {
 		super();
 		this.nombre = nombre;
 	}

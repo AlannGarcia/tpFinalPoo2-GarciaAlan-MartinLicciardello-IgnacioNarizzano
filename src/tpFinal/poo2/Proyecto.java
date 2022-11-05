@@ -6,12 +6,12 @@ import java.util.List;
 public class Proyecto {
 	String nombre;
 	String descripcion;
-	List<Muestra> muestras;
-	List<Categorias>  categorias;
-	List<Desafio> desafios;
-	List<Usuario> usuarios;
+	List<Muestra> muestras = new ArrayList<Muestra>();
+	List<Categoria> categorias = new ArrayList<Categoria>();
+	List<Desafio> desafios = new ArrayList<Desafio>();
+	List<Usuario> usuarios = new ArrayList<Usuario>();
 	
-	public Proyecto(String nombre, String descripcion, List<Categorias> categorias) {
+	public Proyecto(String nombre, String descripcion, List<Categoria> categorias) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -23,15 +23,17 @@ public class Proyecto {
 		muestras.add(muestra);
 	}
 	
-	
 	public void agregarUsuario(Usuario usuario) {
 		usuarios.add(usuario);
 		usuario.agregarProyecto(this);
 	}
 
-
 	public List<Desafio> getDesafios() {
-		return desafios;
+		return this.desafios;
+	}
+	
+	public void agregarDesafio(Desafio desafio) {
+		desafios.add(desafio);
 	}
 	
 	

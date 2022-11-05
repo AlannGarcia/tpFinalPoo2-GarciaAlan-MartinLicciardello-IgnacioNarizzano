@@ -9,9 +9,9 @@ import java.util.List;
 
 public class FiltroExcluirCategorias implements Filtro{
 	
-		List<Categorias> categorias;
+		List<Categoria> categorias;
 
-		public FiltroExcluirCategorias(List<Categorias> categorias) {
+		public FiltroExcluirCategorias(List<Categoria> categorias) {
 			super();
 			this.categorias = categorias;
 		}

@@ -10,30 +10,25 @@ public class Desafio {
 	int recompensa;
 	
 	
-	public Desafio(Area area, int cantidadMuestras, NivelDificultad dificultad, int recompensa) {
+	public Desafio(Area area, int cantidadMuestras, NivelDificultad dificultad, int recompensa, RestriccionTemporal restriccionTemporal) {
 		super();
 		this.area = area;
 		this.cantidadMuestras = cantidadMuestras;
 		this.dificultad = dificultad;
 		this.recompensa = recompensa;
+		this.restriccionTemporal = restriccionTemporal;
 	}
-	
-	
 	
 	public RestriccionTemporal getRestriccionTemporal() {
 		return restriccionTemporal;
 	}
 
-
-
 	public void setRestriccionTemporal(RestriccionTemporal restriccionTemporal) {
 		this.restriccionTemporal = restriccionTemporal;
 	}
 
-
-
 	public boolean desafioExpirado() {
-			return !restriccionTemporal.cumpleConFecha(LocalDate.now()); //no cumple con la fecha
+		return !restriccionTemporal.cumpleConFecha(LocalDate.now()); //no cumple con la fecha
 	}
 	
 	public Integer valorDeCoincidencia() {

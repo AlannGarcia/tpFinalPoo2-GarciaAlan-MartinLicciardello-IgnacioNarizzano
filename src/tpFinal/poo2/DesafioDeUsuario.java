@@ -25,9 +25,8 @@ public class DesafioDeUsuario {
 			return estadoUsuario.getClass() == EstadoDesafioUsuarioCompletado.class;
 	 	}
 		
-		
 		public int porcentajeDeCompletitud() {
-			return 100 - (desafio.cantidadMuestras - this.cantidadMuestras)/(desafio.cantidadMuestras)*100;       
+			return ((desafio.cantidadMuestras * 100) / desafio.cantidadMuestras);       
 					
 		}
 		
@@ -49,8 +48,6 @@ public class DesafioDeUsuario {
 			}
 		}
 		
-		
-		
 		public Desafio getDesafio() {
 			return desafio;
 		}
@@ -62,4 +59,7 @@ public class DesafioDeUsuario {
 				throw new Exception("El desafio no ha sido completado");
 			}
 		}
+//		public void votar(Voto v) {
+//			voto = v;
+//		}
 }
