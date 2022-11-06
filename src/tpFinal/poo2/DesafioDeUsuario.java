@@ -26,7 +26,7 @@ public class DesafioDeUsuario {
 	 	}
 		
 		public int porcentajeDeCompletitud() {
-			return ((desafio.cantidadMuestras * 100) / desafio.cantidadMuestras);       
+			return ((cantidadMuestras * 100) / desafio.cantidadMuestras);       
 					
 		}
 		
@@ -59,7 +59,13 @@ public class DesafioDeUsuario {
 				throw new Exception("El desafio no ha sido completado");
 			}
 		}
-//		public void votar(Voto v) {
-//			voto = v;
-//		}
+		
+		public void votar(Voto v) {
+			voto = v;
+		}
+		
+		public Voto getVoto() {
+			return this.voto;
+		}
 }
+

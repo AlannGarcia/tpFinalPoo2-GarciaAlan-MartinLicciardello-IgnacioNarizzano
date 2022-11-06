@@ -1,5 +1,6 @@
 package tpFinal.poo2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FiltroOr implements Filtro{
@@ -17,8 +18,10 @@ public class FiltroOr implements Filtro{
 	public List<Proyecto> filtrar(List<Proyecto> proyectos) {
 		
 		List<Proyecto> proyectoX = a.filtrar(proyectos);
-		proyectoX.addAll(b.filtrar(proyectos));
-		return proyectoX;
+		List<Proyecto> ps = new ArrayList<Proyecto>();
+		ps.addAll(proyectoX);
+		ps.addAll(b.filtrar(proyectos));
+		return ps;
 		
 	}
 

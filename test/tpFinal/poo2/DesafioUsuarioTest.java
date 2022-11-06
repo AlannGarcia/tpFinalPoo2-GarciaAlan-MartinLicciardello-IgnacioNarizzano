@@ -25,10 +25,12 @@ class DesafioUsuarioTest {
 	    Categoria categorias2;
 	    List<Categoria> categorias;
 	    RestriccionTemporal restriccionTemporal; 
+	    RestriccionTemporal restriccionTemporal2; 
 	
 	    @BeforeEach
 	    public void setUp() {   //despues de 2026 rompe la restriccion
 	        restriccionTemporal = new RestriccionTemporal(LocalDate.of(2020,12, 02), LocalDate.of(2026,02, 02),new EstrategiaSemanalSemCompleta());
+	        restriccionTemporal2 = new RestriccionTemporal(LocalDate.of(2022,04, 02), LocalDate.of(2022,04, 02),new EstrategiaSemanalDia());
 	        categorias1 = new Categoria("Primera");
 	        categorias2 = new Categoria("Segunda");
 	        categorias = Arrays.asList(categorias1,categorias2);
@@ -39,7 +41,7 @@ class DesafioUsuarioTest {
 	        areaDesafio = new Area(ubicacionDesafio,3);
 	        desafio = new Desafio(areaDesafio,2 , NivelDificultad.Dificil,2 , restriccionTemporal);
 	        desafio.setRestriccionTemporal(restriccionTemporal);
-	        desafioB = new Desafio(areaDesafio, 2, NivelDificultad.Facil,2 , restriccionTemporal);
+	        desafioB = new Desafio(areaDesafio, 2, NivelDificultad.Facil,2 , restriccionTemporal2);
 	        proyecto = new Proyecto("Plantas", "las plantas bla bla bla", categorias);
 	        muestra = new Muestra(usuarioA, LocalDate.of(2022,02, 02), ubicacionDesafio);
 	        proyecto.agregarDesafio(desafio);
@@ -50,17 +52,52 @@ class DesafioUsuarioTest {
     
 	    
 	    @Test
-	    void fechaCuandoSeCumpleDesafioTest() {
+	    void fechaCuandoSeCumpleDesafioTest() throws Exception {
 	        usuarioA.agregarDesafio(desafio);
 	        proyecto.agregarDesafio(desafio);
 	        usuarioA.enviarMuestra(proyecto, muestra);
 	        usuarioA.enviarMuestra(proyecto, muestra);
 	        
-	        assertEquals(LocalDate.now(), usuarioA.desafiosDeUsuario.get(0).fecha);
 	        
 	        usuarioA.enviarMuestra(proyecto, muestra);
 	        assertEquals(2, usuarioA.desafiosDeUsuario.get(0).cantidadMuestras);
 	        assertTrue(usuarioA.desafiosDeUsuario.get(0).completoDesafio());
+	        
+	        assertEquals(usuarioA.desafiosDeUsuario.get(0).getFechaCompletado(), LocalDate.now());
+	    }
+	    
+	    @Test
+	    void noCompletoDesafioPorRestriccionTemporalDia() {
+	    	usuarioB.agregarDesafio(desafioB);
+	    	proyecto.agregarDesafio(desafioB);
+	    	usuarioB.enviarMuestra(proyecto, muestra);
+	    	// no toma la muestra ya que esta fuera de fecha
+	    	assertEquals(0,  usuarioB.desafiosDeUsuario.get(0).cantidadMuestras);
+	    	assertFalse(restriccionTemporal2.cumpleConFecha(muestra.fecha));
 	    }
 
+	    @Test
+	    void noCompletoDesafioPorRestriccionTemporalDia2() {
+	    	assertFalse(desafioB.getRestriccionTemporal().cumpleConFecha(muestra.fecha));
+	    }
+	    
+	    @Test
+	    void cambioDeRestriccionEnDesafioTest() {
+	    	RestriccionTemporal rt = new RestriccionTemporal(LocalDate.of(2022,04, 02), LocalDate.of(2022,04, 02),new EstrategiaSemanalDia());
+	    	EstrategiaSemanal estrategiaSemCom = new EstrategiaSemanalSemCompleta(); 
+	    	restriccionTemporal2.setEstrategiaSemanal(estrategiaSemCom);
+	    	desafio.setRestriccionTemporal(restriccionTemporal2);
+	    	
+	    	assertFalse(desafio.getRestriccionTemporal() == rt);
+	    }
+	    
+	    @Test 
+	    void votoTest() {
+	    	usuarioB.agregarDesafio(desafioB);
+	    	
+	    	usuarioB.desafiosDeUsuario.get(0).votar(Voto.v3);
+	    	
+	    	assertEquals(usuarioB.desafiosDeUsuario.get(0).getVoto(), Voto.v3);
+	    }
+	    
 }

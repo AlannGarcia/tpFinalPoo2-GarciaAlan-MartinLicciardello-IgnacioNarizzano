@@ -4,9 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 
-import java.util.Collections;
-import java.util.List;
-
 public class FiltroExcluirCategorias implements Filtro{
 	
 		List<Categoria> categorias;
