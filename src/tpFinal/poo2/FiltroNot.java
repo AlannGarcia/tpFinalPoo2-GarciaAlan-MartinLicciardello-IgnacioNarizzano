@@ -1,9 +1,10 @@
 package tpFinal.poo2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FiltroNot implements Filtro{
-	Filtro filtro;
+	private Filtro filtro;
 
 	public FiltroNot(Filtro filtro) {
 		super();
@@ -12,9 +13,9 @@ public class FiltroNot implements Filtro{
 
 	@Override
 	public List<Proyecto> filtrar(List<Proyecto> proyectos) {
-		List<Proyecto> proyectoDos = proyectos;
-		proyectoDos.removeAll(filtro.filtrar(proyectos));
-		return proyectoDos;
+		List<Proyecto> proyectosCopiados = new ArrayList<Proyecto>(proyectos);
+		proyectosCopiados.removeAll(filtro.filtrar(proyectos));
+		return proyectosCopiados;
 	}
 	
 	//resta de conjuntos a los proyectos dos, le resto proyectos filtrados

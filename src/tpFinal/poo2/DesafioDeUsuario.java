@@ -10,7 +10,6 @@ public class DesafioDeUsuario {
 	EstadoDesafioUsuario estadoUsuario;
 	LocalDate fecha = null;
 	
-	
 	public DesafioDeUsuario(Desafio desafio) {
 		this.desafio = desafio;
 		if(!desafio.desafioExpirado()) {
@@ -22,7 +21,7 @@ public class DesafioDeUsuario {
 	
 	
 		public boolean completoDesafio() {
-			return estadoUsuario.getClass() == EstadoDesafioUsuarioCompletado.class;
+			return estadoUsuario.completoDesafio();
 	 	}
 		
 		public int porcentajeDeCompletitud() {
@@ -30,34 +29,40 @@ public class DesafioDeUsuario {
 					
 		}
 		
-		public void evaluarMuestra(Muestra muestra) throws Exception{
+		public String evaluarMuestra(Muestra muestra) {
 			if(muestra.perteneceAlArea(desafio.area)) {
-				estadoUsuario.evaluarMuestra(muestra, this);
+				return estadoUsuario.evaluarMuestra(muestra, this);
+			}else {
+				return "No pertenece al area";
 			}
 		}
 	     
-		public void evaluarMuestraEnEstadoActivo(Muestra muestra) {
+		public String evaluarMuestraEnEstadoActivo(Muestra muestra) {
+			String resultado;
+			
 			if(this.desafio.desafioExpirado()) {
+				resultado = "Desafio inactivo";
 				estadoUsuario = new EstadoDesafioUsuarioInactivo();
 			}else if(this.desafio.cantidadMuestras == cantidadMuestras + 1){
+				resultado = "Desafio completado";
 				estadoUsuario = new EstadoDesafioUsuarioCompletado();
 				cantidadMuestras++;
 				fecha = LocalDate.now();
 			}else {
+				resultado = "Muestra evaluada";
 				cantidadMuestras++;
 			}
+			return resultado;
 		}
 		
 		public Desafio getDesafio() {
 			return desafio;
 		}
 		
-		public LocalDate getFechaCompletado() throws Exception{
-			try {
-				return fecha;
-			}catch(NullPointerException e) {
-				throw new Exception("El desafio no ha sido completado");
-			}
+		public String getFechaCompletado() throws Exception{
+			
+				return estadoUsuario.fechaCompletado(this);
+			
 		}
 		
 		public void votar(Voto v) {
@@ -66,6 +71,12 @@ public class DesafioDeUsuario {
 		
 		public Voto getVoto() {
 			return this.voto;
+		}
+
+
+		public LocalDate getFecha() {
+			// TODO Auto-generated method stub
+			return fecha;
 		}
 }
 

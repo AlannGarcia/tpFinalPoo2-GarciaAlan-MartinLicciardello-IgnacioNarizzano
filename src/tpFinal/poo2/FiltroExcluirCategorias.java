@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FiltroExcluirCategorias implements Filtro{
 	
-		List<Categoria> categorias;
+	private List<Categoria> categorias;
 
 		public FiltroExcluirCategorias(List<Categoria> categorias) {
 			super();
