@@ -34,19 +34,19 @@ class DesafioUsuarioTest {
 	        categorias1 = new Categoria("Primera");
 	        categorias2 = new Categoria("Segunda");
 	        categorias = Arrays.asList(categorias1,categorias2);
-	        usuarioA = new Usuario("Martin",new Preferencia(1,NivelDificultad.Facil,3));
-	        usuarioB = new Usuario("Lucas",new Preferencia(2,NivelDificultad.Intermedio,2));
-	        usuarioC = new Usuario("Diego",new Preferencia(1,NivelDificultad.MuyDificil,3));
+	        usuarioA = new Usuario("Martin",new Preferencia(1,NivelDificultad.FACIL,3));
+	        usuarioB = new Usuario("Lucas",new Preferencia(2,NivelDificultad.INTERMEDIO,2));
+	        usuarioC = new Usuario("Diego",new Preferencia(1,NivelDificultad.MUY_DIFICIL,3));
 	        ubicacionDesafio = new Ubicacion(1,2); 
 	        areaDesafio = new Area(ubicacionDesafio,3);
-	        desafio = new Desafio(areaDesafio,2 , NivelDificultad.Dificil,2 , restriccionTemporal);
+	        desafio = new Desafio(areaDesafio,2 , NivelDificultad.DIFICIL,2 , restriccionTemporal);
 	        desafio.setRestriccionTemporal(restriccionTemporal);
-	        desafioB = new Desafio(areaDesafio, 2, NivelDificultad.Facil,2 , restriccionTemporal2);
+	        desafioB = new Desafio(areaDesafio, 2, NivelDificultad.FACIL,2 , restriccionTemporal2);
 	        proyecto = new Proyecto("Plantas", "las plantas bla bla bla", categorias);
 	        muestra = new Muestra(usuarioA, LocalDate.of(2022,02, 02), ubicacionDesafio);
 	        proyecto.agregarDesafio(desafio);
 	        proyecto.agregarUsuario(usuarioA);
-	        desafioA = new Desafio(areaDesafio, 4, NivelDificultad.Intermedio,2 , restriccionTemporal);
+	        desafioA = new Desafio(areaDesafio, 4, NivelDificultad.INTERMEDIO,2 , restriccionTemporal);
 	        
 	    }
     

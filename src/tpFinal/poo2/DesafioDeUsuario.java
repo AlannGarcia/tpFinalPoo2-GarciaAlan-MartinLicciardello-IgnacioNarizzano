@@ -1,7 +1,6 @@
 package tpFinal.poo2;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class DesafioDeUsuario {
 	Desafio desafio;

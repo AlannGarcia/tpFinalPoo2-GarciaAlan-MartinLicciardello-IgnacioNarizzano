@@ -32,19 +32,19 @@ class UsuarioTest {
         categorias1 = new Categoria("Primera");
         categorias2 = new Categoria("Segunda");
         categorias = Arrays.asList(categorias1,categorias2);
-        usuarioA = new Usuario("Martin",new Preferencia(1,NivelDificultad.Facil,3));
-        usuarioB = new Usuario("Lucas",new Preferencia(2,NivelDificultad.Intermedio,2));
-        usuarioC = new Usuario("Diego",new Preferencia(1,NivelDificultad.MuyDificil,3));
+        usuarioA = new Usuario("Martin",new Preferencia(1,NivelDificultad.FACIL,3));
+        usuarioB = new Usuario("Lucas",new Preferencia(2,NivelDificultad.INTERMEDIO,2));
+        usuarioC = new Usuario("Diego",new Preferencia(1,NivelDificultad.MUY_DIFICIL,3));
         ubicacionDesafio = new Ubicacion(1,2); 
         areaDesafio = new Area(ubicacionDesafio,3);
-        desafio = new Desafio(areaDesafio,2 , NivelDificultad.Dificil,2 , restriccionTemporal);
+        desafio = new Desafio(areaDesafio,2 , NivelDificultad.DIFICIL,2 , restriccionTemporal);
         desafio.setRestriccionTemporal(restriccionTemporal);
-        desafioB = new Desafio(areaDesafio, 1, NivelDificultad.Facil,2 , restriccionTemporal);
+        desafioB = new Desafio(areaDesafio, 1, NivelDificultad.FACIL,2 , restriccionTemporal);
         proyecto = new Proyecto("Plantas", "las plantas bla bla bla", categorias);
         muestra = new Muestra(usuarioA, LocalDate.of(2022,02, 02), ubicacionDesafio );
         proyecto.agregarDesafio(desafio);
         proyecto.agregarUsuario(usuarioA);
-        desafioA = new Desafio(areaDesafio, 4,  NivelDificultad.Intermedio,2 , restriccionTemporal);
+        desafioA = new Desafio(areaDesafio, 4,  NivelDificultad.INTERMEDIO,2 , restriccionTemporal);
         
     }
     
@@ -101,9 +101,9 @@ class UsuarioTest {
         
         
         
-        Desafio desafioC = new Desafio(areaDesafio, 6, NivelDificultad.Facil,1 , restriccionTemporal);
-        Desafio desafioD = new Desafio(areaDesafio, 4, NivelDificultad.Intermedio,2 , restriccionTemporal);
-        Desafio desafioE = new Desafio(areaDesafio, 8, NivelDificultad.MuyDificil,3 , restriccionTemporal);
+        Desafio desafioC = new Desafio(areaDesafio, 6, NivelDificultad.FACIL,1 , restriccionTemporal);
+        Desafio desafioD = new Desafio(areaDesafio, 4, NivelDificultad.INTERMEDIO,2 , restriccionTemporal);
+        Desafio desafioE = new Desafio(areaDesafio, 8, NivelDificultad.MUY_DIFICIL,3 , restriccionTemporal);
         usuarioA.agregarDesafio(desafio);
         
         
@@ -123,9 +123,9 @@ class UsuarioTest {
     public void  buscarMatchPorPreferenciasTest() {
         usuarioA.setEstadoRecomendacion(new EstrategiaFavoritos());
         
-        Desafio desafioC = new Desafio(areaDesafio, 6, NivelDificultad.Facil,1 , restriccionTemporal);
-        Desafio desafioD = new Desafio(areaDesafio, 4, NivelDificultad.Intermedio,2 , restriccionTemporal);
-        Desafio desafioE = new Desafio(areaDesafio, 8, NivelDificultad.MuyDificil,3 , restriccionTemporal);
+        Desafio desafioC = new Desafio(areaDesafio, 6, NivelDificultad.FACIL,1 , restriccionTemporal);
+        Desafio desafioD = new Desafio(areaDesafio, 4, NivelDificultad.INTERMEDIO,2 , restriccionTemporal);
+        Desafio desafioE = new Desafio(areaDesafio, 8, NivelDificultad.MUY_DIFICIL,3 , restriccionTemporal);
         usuarioA.agregarDesafio(desafio);
         
         
@@ -145,7 +145,7 @@ class UsuarioTest {
     @Test
     public void enviarMuestraEnDesafioInactivo() {
         RestriccionTemporal restrTemp = new RestriccionTemporal(LocalDate.of(2020,12, 02), LocalDate.of(2021,02, 02), new EstrategiaSemanalFinDeSem());
-        Desafio desafioF = new Desafio(areaDesafio,7,NivelDificultad.Intermedio, 2,restrTemp);
+        Desafio desafioF = new Desafio(areaDesafio,7,NivelDificultad.INTERMEDIO, 2,restrTemp);
         usuarioA.agregarDesafio(desafioF);
         proyecto.agregarDesafio(desafioF);
         usuarioA.enviarMuestra(proyecto, muestra);

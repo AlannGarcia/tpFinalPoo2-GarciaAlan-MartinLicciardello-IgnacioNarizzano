@@ -15,7 +15,7 @@ public abstract class FiltroComposite implements Filtro{
 	}
 	
 	
-public List<Proyecto> filtrar(List<Proyecto> proyectos) {
+public final List<Proyecto> filtrar(List<Proyecto> proyectos) {
     List<Proyecto> proyectosCopiados = new ArrayList<Proyecto>(proyectos);
 	List<Proyecto> proyectosFiltrados = b.filtrar(proyectosCopiados);
 	List<Proyecto> proyectoX = a.filtrar(proyectosCopiados);
