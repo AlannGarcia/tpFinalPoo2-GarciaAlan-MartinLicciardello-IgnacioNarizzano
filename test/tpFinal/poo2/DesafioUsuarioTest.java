@@ -60,10 +60,10 @@ class DesafioUsuarioTest {
 	        
 	        
 	        usuarioA.enviarMuestra(proyecto, muestra);
-	        assertEquals(2, usuarioA.desafiosDeUsuario.get(0).cantidadMuestras);
-	        assertTrue(usuarioA.desafiosDeUsuario.get(0).completoDesafio());
+	        assertEquals(2, usuarioA.getDesafiosDeUsuario().get(0).cantidadMuestras);
+	        assertTrue(usuarioA.getDesafiosDeUsuario().get(0).completoDesafio());
 	        
-	        assertEquals(usuarioA.desafiosDeUsuario.get(0).getFechaCompletado(), LocalDate.now());
+	        assertEquals(usuarioA.getDesafiosDeUsuario().get(0).getFechaCompletado(), LocalDate.now());
 	    }
 	    
 	    @Test
@@ -72,7 +72,7 @@ class DesafioUsuarioTest {
 	    	proyecto.agregarDesafio(desafioB);
 	    	usuarioB.enviarMuestra(proyecto, muestra);
 	    	// no toma la muestra ya que esta fuera de fecha
-	    	assertEquals(0,  usuarioB.desafiosDeUsuario.get(0).cantidadMuestras);
+	    	assertEquals(0,  usuarioB.getDesafiosDeUsuario().get(0).cantidadMuestras);
 	    	assertFalse(restriccionTemporal2.cumpleConFecha(muestra.fecha));
 	    }
 
@@ -95,9 +95,9 @@ class DesafioUsuarioTest {
 	    void votoTest() {
 	    	usuarioB.agregarDesafio(desafioB);
 	    	
-	    	usuarioB.desafiosDeUsuario.get(0).votar(Voto.v3);
+	    	usuarioB.getDesafiosDeUsuario().get(0).votar(Voto.v3);
 	    	
-	    	assertEquals(usuarioB.desafiosDeUsuario.get(0).getVoto(), Voto.v3);
+	    	assertEquals(usuarioB.getDesafiosDeUsuario().get(0).getVoto(), Voto.v3);
 	    }
 	    
 }

@@ -1,7 +1,6 @@
 package tpFinal.poo2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class FiltroComposite implements Filtro{
@@ -15,14 +14,17 @@ public abstract class FiltroComposite implements Filtro{
 		this.b = b;
 	}
 	
+	
 public List<Proyecto> filtrar(List<Proyecto> proyectos) {
-	List<Proyecto> proyectosCopiados = new ArrayList<Proyecto>(proyectos);
+    List<Proyecto> proyectosCopiados = new ArrayList<Proyecto>(proyectos);
 	List<Proyecto> proyectosFiltrados = b.filtrar(proyectosCopiados);
-		List<Proyecto> proyectoX = a.filtrar(proyectosCopiados);
-		this.filtradoEspecifico(proyectosCopiados,proyectosFiltrados);
-		return proyectosCopiados;
-		
-	}
+	List<Proyecto> proyectoX = a.filtrar(proyectosCopiados);
+	this.filtradoEspecifico(proyectoX,proyectosFiltrados);
+	return proyectoX;
+
+}	
+	
+
 
 protected abstract void filtradoEspecifico(List<Proyecto> ps, List<Proyecto> proyectosFiltrados);
 

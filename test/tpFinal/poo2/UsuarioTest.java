@@ -53,7 +53,7 @@ class UsuarioTest {
 	void agregarDesafioTest() {
         usuarioA.agregarDesafio(desafio);
         
-        assertTrue(usuarioA.desafiosDeUsuario.stream().map(n -> n.getDesafio()).toList().contains(desafio));
+        assertTrue(usuarioA.getDesafiosDeUsuario().stream().map(n -> n.getDesafio()).toList().contains(desafio));
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ class UsuarioTest {
         usuarioA.enviarMuestra(proyecto, muestra);
         
         assertTrue(proyecto.muestras.contains(muestra));
-        assertEquals(usuarioA.desafiosDeUsuario.get(0).cantidadMuestras,1);
+        assertEquals(usuarioA.getDesafiosDeUsuario().get(0).cantidadMuestras,1);
     } 
 	@Test
 	public void porcentajeCompletitudTest() throws Exception{
@@ -149,7 +149,7 @@ class UsuarioTest {
         usuarioA.agregarDesafio(desafioF);
         proyecto.agregarDesafio(desafioF);
         usuarioA.enviarMuestra(proyecto, muestra);
-        assertEquals(0,usuarioA.desafiosDeUsuario.get(0).cantidadMuestras);
+        assertEquals(0,usuarioA.getDesafiosDeUsuario().get(0).cantidadMuestras);
         assertEquals(proyecto.muestras.size(),1);
         
     }

@@ -41,6 +41,12 @@ public class Usuario {
 	}
 
 	
+	public List<DesafioDeUsuario> getDesafiosDeUsuario() {
+		return desafiosDeUsuario;
+	}
+
+
+
 	public List<Desafio> buscarMatchDesafio(List<Desafio> desafios) {
 		
 		return estadoRecomendacion.buscarMatchDesafios( desafios, desafiosDeUsuario, preferencias); 
