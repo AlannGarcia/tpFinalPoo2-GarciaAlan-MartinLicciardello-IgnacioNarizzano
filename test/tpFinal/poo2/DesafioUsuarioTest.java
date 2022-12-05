@@ -9,6 +9,11 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import tpFinal.poo2.EstrategiaSemanal.EstrategiaSemanal;
+import tpFinal.poo2.EstrategiaSemanal.EstrategiaSemanalDuranteLaSemana;
+import tpFinal.poo2.EstrategiaSemanal.EstrategiaSemanalFinDeSem;
+import tpFinal.poo2.EstrategiaSemanal.EstrategiaSemanalNinguna;
+
 class DesafioUsuarioTest {
 
 	    Usuario usuarioA;
@@ -26,11 +31,17 @@ class DesafioUsuarioTest {
 	    List<Categoria> categorias;
 	    RestriccionTemporal restriccionTemporal; 
 	    RestriccionTemporal restriccionTemporal2; 
-	
+	    
+	    RestriccionTemporal restTempFinDeSemana;
+	    Desafio desafioFinDeSemana;
+	    Muestra muestraFinDeSemana;
+	    Muestra muestraDiaHabil;
+	    
 	    @BeforeEach
 	    public void setUp() {   //despues de 2026 rompe la restriccion
-	        restriccionTemporal = new RestriccionTemporal(LocalDate.of(2020,12, 02), LocalDate.of(2026,02, 02),new EstrategiaSemanalSemCompleta());
-	        restriccionTemporal2 = new RestriccionTemporal(LocalDate.of(2022,04, 02), LocalDate.of(2022,04, 02),new EstrategiaSemanalDia());
+	        restriccionTemporal = new RestriccionTemporal(LocalDate.of(2020,12, 02), LocalDate.of(2026,02, 02),new EstrategiaSemanalNinguna());
+	        restriccionTemporal2 = new RestriccionTemporal(LocalDate.of(2022,04, 02), LocalDate.of(2022,04, 02),new EstrategiaSemanalDuranteLaSemana());
+	       
 	        categorias1 = new Categoria("Primera");
 	        categorias2 = new Categoria("Segunda");
 	        categorias = Arrays.asList(categorias1,categorias2);
@@ -48,6 +59,12 @@ class DesafioUsuarioTest {
 	        proyecto.agregarUsuario(usuarioA);
 	        desafioA = new Desafio(areaDesafio, 4, NivelDificultad.INTERMEDIO,2 , restriccionTemporal);
 	        
+	        restTempFinDeSemana = new RestriccionTemporal(LocalDate.of(2022,10,01), LocalDate.of(2023,01,31),new EstrategiaSemanalFinDeSem());
+	    	desafioFinDeSemana = new Desafio(areaDesafio, 1, NivelDificultad.MUY_DIFICIL, 2, restTempFinDeSemana);
+	    	muestraFinDeSemana =  new Muestra(usuarioB, LocalDate.of(2022,12,31), ubicacionDesafio);
+	    	muestraDiaHabil =  new Muestra(usuarioB, LocalDate.of(2022,12,23), ubicacionDesafio);
+	    	
+	    	
 	    }
     
 	    
@@ -60,10 +77,10 @@ class DesafioUsuarioTest {
 	        
 	        
 	        usuarioA.enviarMuestra(proyecto, muestra);
-	        assertEquals(2, usuarioA.getDesafiosDeUsuario().get(0).cantidadMuestras);
+	        assertEquals(2, usuarioA.getDesafiosDeUsuario().get(0).getCantidadMuestras());
 	        assertTrue(usuarioA.getDesafiosDeUsuario().get(0).completoDesafio());
 	        
-	        assertEquals(usuarioA.getDesafiosDeUsuario().get(0).getFechaCompletado(), LocalDate.now());
+	        assertEquals(usuarioA.getDesafiosDeUsuario().get(0).getFechaCompletado(), LocalDate.now().toString());
 	    }
 	    
 	    @Test
@@ -72,19 +89,20 @@ class DesafioUsuarioTest {
 	    	proyecto.agregarDesafio(desafioB);
 	    	usuarioB.enviarMuestra(proyecto, muestra);
 	    	// no toma la muestra ya que esta fuera de fecha
-	    	assertEquals(0,  usuarioB.getDesafiosDeUsuario().get(0).cantidadMuestras);
-	    	assertFalse(restriccionTemporal2.cumpleConFecha(muestra.fecha));
+	    	assertEquals(0,  usuarioB.getDesafiosDeUsuario().get(0).getCantidadMuestras());
+	    	assertFalse(restriccionTemporal2.cumpleConFecha(muestra.getFecha()));
 	    }
+	    
 
 	    @Test
 	    void noCompletoDesafioPorRestriccionTemporalDia2() {
-	    	assertFalse(desafioB.getRestriccionTemporal().cumpleConFecha(muestra.fecha));
+	    	assertFalse(desafioB.getRestriccionTemporal().cumpleConFecha(muestra.getFecha()));
 	    }
 	    
 	    @Test
 	    void cambioDeRestriccionEnDesafioTest() {
-	    	RestriccionTemporal rt = new RestriccionTemporal(LocalDate.of(2022,04, 02), LocalDate.of(2022,04, 02),new EstrategiaSemanalDia());
-	    	EstrategiaSemanal estrategiaSemCom = new EstrategiaSemanalSemCompleta(); 
+	    	RestriccionTemporal rt = new RestriccionTemporal(LocalDate.of(2022,04, 02), LocalDate.of(2022,04, 02),new EstrategiaSemanalDuranteLaSemana());
+	    	EstrategiaSemanal estrategiaSemCom = new EstrategiaSemanalNinguna(); 
 	    	restriccionTemporal2.setEstrategiaSemanal(estrategiaSemCom);
 	    	desafio.setRestriccionTemporal(restriccionTemporal2);
 	    	
@@ -95,9 +113,35 @@ class DesafioUsuarioTest {
 	    void votoTest() {
 	    	usuarioB.agregarDesafio(desafioB);
 	    	
-	    	usuarioB.getDesafiosDeUsuario().get(0).votar(Voto.v3);
+	    	usuarioB.getDesafiosDeUsuario().get(0).votar(Voto.V3);
 	    	
-	    	assertEquals(usuarioB.getDesafiosDeUsuario().get(0).getVoto(), Voto.v3);
+	    	assertEquals(usuarioB.getDesafiosDeUsuario().get(0).getVoto(), Voto.V3);
+	    }
+	    
+	    
+	    @Test
+	    void completoDesafioConRestriccionFinDeSemanaTest() {
+	    	
+	    	//exercise    	
+	    	usuarioB.agregarDesafio(desafioFinDeSemana);
+	    	proyecto.agregarDesafio(desafioFinDeSemana);
+	    	usuarioB.enviarMuestra(proyecto, muestraFinDeSemana);
+	    	
+	    	//verify
+	    	assertEquals(1, usuarioB.getDesafiosDeUsuario().get(0).getCantidadMuestras());
+	    	assertTrue(usuarioB.getDesafiosDeUsuario().get(0).completoDesafio());
+	    }
+
+	    @Test
+	    void noCompletoDesafioConRestriccionFinDeSemanaTest() {
+	    	//exercise
+	    	usuarioB.agregarDesafio(desafioFinDeSemana);
+	    	proyecto.agregarDesafio(desafioFinDeSemana);
+	    	usuarioB.enviarMuestra(proyecto, muestraDiaHabil);
+	    	
+	    	//verify
+	    	assertEquals(0, usuarioB.getDesafiosDeUsuario().get(0).getCantidadMuestras());
+	    	assertFalse(usuarioB.getDesafiosDeUsuario().get(0).completoDesafio());
 	    }
 	    
 }

@@ -1,6 +1,8 @@
-package tpFinal.poo2;
+package tpFinal.poo2.Filtros;
 
 import java.util.List;
+
+import tpFinal.poo2.Proyecto;
 
 public class FiltroOr extends FiltroComposite{
 	

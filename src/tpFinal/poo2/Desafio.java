@@ -3,11 +3,11 @@ package tpFinal.poo2;
 import java.time.LocalDate;
 
 public class Desafio {
-	Area area;
-	RestriccionTemporal restriccionTemporal;
-    int cantidadMuestras;
-	NivelDificultad dificultad;
-	int recompensa;
+	private Area area;
+	private RestriccionTemporal restriccionTemporal;
+    private int cantidadMuestras;
+	private NivelDificultad dificultad;
+	private int recompensa;
 	
 	
 	public Desafio(Area area, int cantidadMuestras, NivelDificultad dificultad, int recompensa, RestriccionTemporal restriccionTemporal) {
@@ -33,6 +33,14 @@ public class Desafio {
 	
 	public Integer valorDeCoincidencia() {
 		return cantidadMuestras + dificultad.nivelDificultad() + recompensa;
+	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public int getCantidadMuestras() {
+		return cantidadMuestras;
 	}
 	
 	

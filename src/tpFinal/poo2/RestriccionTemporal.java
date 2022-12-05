@@ -2,6 +2,8 @@ package tpFinal.poo2;
 
 import java.time.LocalDate;
 
+import tpFinal.poo2.EstrategiaSemanal.EstrategiaSemanal;
+
 public class RestriccionTemporal {
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;

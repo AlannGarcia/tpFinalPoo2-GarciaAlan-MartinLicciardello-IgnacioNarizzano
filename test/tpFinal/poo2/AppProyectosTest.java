@@ -1,12 +1,16 @@
 package tpFinal.poo2;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import tpFinal.poo2.Filtros.*;
+import tpFinal.poo2.Filtros.FiltroIncluirCategorias;
 
 class AppProyectosTest {
 
@@ -27,8 +31,15 @@ class AppProyectosTest {
 	Filtro filtroNoAves;
 	Filtro filtroSiPlantas;
 	
+	// Para mockito
+	Proyecto dummyProyArboles;
+	Filtro filtroPlantas;
+	
+	
 	@BeforeEach
 	void setUp() throws Exception {
+		
+		
 		app = new AppProyectos();
 		plantas = new Categoria("Plantas");
 		aves = new Categoria("Aves");
@@ -47,20 +58,33 @@ class AppProyectosTest {
 		filtroSiAnfibios = new FiltroIncluirCategorias(categoriasAnfibios);
 		filtroNoAves = new FiltroExcluirCategorias(categoriasAves);
 		filtroSiPlantas = new FiltroIncluirCategorias(categoriasPlantas);
+		
+		// Para mockito
+		dummyProyArboles = mock(Proyecto.class);
+		filtroPlantas = mock(FiltroIncluirCategorias.class);
+		
+		
 	}
 
 	
 	
 	@Test
 	void agregarProyectoTest() {
-		proyectoArboles = new Proyecto("Arboles", "Proyecto arboles", categoriasArboles);
-        app.agregarProyecto(proyectoArboles);
+//		proyectoArboles = new Proyecto("Arboles", "Proyecto arboles", categoriasArboles);
+//		List<Proyecto> spyProyectos = spy(app.getProyectos());
 	    
-        assertTrue(app.getProyectos().contains(proyectoArboles));
+	    app.agregarProyecto(dummyProyArboles);
+	    
+
+	    assertTrue(app.getProyectos().contains(dummyProyArboles));
+	    
+//        verify(spyProyectos, times(0)).add(dummyProyArboles);
+//        verifyNoInteractions(dummyProyArboles);
 	}
 	
 	@Test
 	void buscarConFiltroAndTest() { // Se prueba filtro And 
+		
 		
 		Filtro filtro = new FiltroAnd(filtroSiAnfibios, filtroNoAves);
 		
@@ -99,6 +123,38 @@ class AppProyectosTest {
 		assertFalse(app.buscarProyectosConFiltro(filtroT).contains(proyectoAnfibios));
 		assertFalse(app.buscarProyectosConFiltro(filtroT).contains(proyectoAves));
 	}
+     
+	@Test  
+    void buscarConFiltrosCombinados() { // Se prueban filtros combinados con mocks
+		
+		//setUp
+		Categoria c1 = mock(Categoria.class);
+		Categoria c2 = mock(Categoria.class);
+		List<Categoria> cs = Arrays.asList(c1,c2);
+		Proyecto p1 = mock(Proyecto.class);
+		
+		Filtro fc1 = spy(new FiltroIncluirCategorias(Arrays.asList(c1)));
+		
+		Filtro filtroT = new FiltroTitulo("Plantas");
+		Filtro filtroAnd = new FiltroAnd(filtroSiAnfibios, fc1);
+		Filtro filtro = new FiltroOr(filtroAnd, filtroT);
 
-
+		when(p1.getCategorias()).thenReturn(cs);
+		when(p1.getNombre()).thenReturn("p1");
+		when(c1.getNombre()).thenReturn("c1");
+		when(c2.getNombre()).thenReturn("c2");
+		
+		//exercise
+		app.agregarProyecto(p1);
+		
+		
+		//verify
+		assertTrue(app.buscarProyectosConFiltro(filtro).contains(proyectoPlantas));
+		assertFalse(app.buscarProyectosConFiltro(filtro).contains(proyectoAnfibios));
+		assertFalse(app.buscarProyectosConFiltro(filtro).contains(p1));
+		
+		verify(p1, times(3)).getNombre();
+		verify(p1, times(6)).getCategorias();
+		verify(fc1, times(3)).filtrar(app.getProyectos());
+	}
 }

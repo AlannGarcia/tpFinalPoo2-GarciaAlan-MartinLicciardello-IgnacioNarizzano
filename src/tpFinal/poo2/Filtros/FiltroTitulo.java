@@ -1,6 +1,8 @@
-package tpFinal.poo2;
+package tpFinal.poo2.Filtros;
 
 import java.util.List;
+
+import tpFinal.poo2.Proyecto;
 
 public class FiltroTitulo implements Filtro{
 	private String titulo;
@@ -13,7 +15,7 @@ public class FiltroTitulo implements Filtro{
 	@Override
 	public List<Proyecto> filtrar(List<Proyecto> proyectos) {
 		// TODO Auto-generated method stub
-		return proyectos.stream().filter(t ->t.nombre.contains(titulo)).toList();
+		return proyectos.stream().filter(t ->t.getNombre().contains(titulo)).toList();
 	}
 	
 	

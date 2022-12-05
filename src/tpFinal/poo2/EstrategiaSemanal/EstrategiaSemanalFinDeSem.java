@@ -1,4 +1,4 @@
-package tpFinal.poo2;
+package tpFinal.poo2.EstrategiaSemanal;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;

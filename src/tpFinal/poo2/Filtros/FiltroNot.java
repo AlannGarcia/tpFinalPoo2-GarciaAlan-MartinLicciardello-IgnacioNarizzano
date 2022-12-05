@@ -1,7 +1,9 @@
-package tpFinal.poo2;
+package tpFinal.poo2.Filtros;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import tpFinal.poo2.Proyecto;
 
 public class FiltroNot implements Filtro{
 	private Filtro filtro;

@@ -1,9 +1,9 @@
 package tpFinal.poo2;
 
 public class Preferencia {
-	int cantidadDeMuestras;
-	NivelDificultad nivelDif;
-	int recompensasPref;
+	private int cantidadDeMuestras;
+	private NivelDificultad nivelDif;
+	private int recompensasPref;
 	
 	
 	public Preferencia(int cantidadDeMuestras, NivelDificultad nivelDif, int recompernsasPref) {
@@ -14,7 +14,8 @@ public class Preferencia {
 	}
 	
 	public Integer cumpleDesafio(Desafio d) {
-		return Math.abs(this.cantidadDeMuestras - d.cantidadMuestras);
+		return Math.abs(this.cantidadDeMuestras - d.getCantidadMuestras());
 	}
+
 	
 }

@@ -1,9 +1,9 @@
-package tpFinal.poo2;
+package tpFinal.poo2.EstrategiaSemanal;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 
-public class EstrategiaSemanalDia extends EstrategiaSemanal{
+public class EstrategiaSemanalDuranteLaSemana extends EstrategiaSemanal{
 
 	@Override
 	public boolean cumpleCon(LocalDate fecha) {

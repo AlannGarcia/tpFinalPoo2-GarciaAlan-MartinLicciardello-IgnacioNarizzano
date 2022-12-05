@@ -3,6 +3,9 @@ package tpFinal.poo2;
 import java.util.ArrayList;
 import java.util.List;
 
+import tpFinal.poo2.EstrategiaRecomendacion.EstrategiaFavoritos;
+import tpFinal.poo2.EstrategiaRecomendacion.EstrategiaRecomendacion;
+
 
 public class Usuario {
 	private String nombre;
@@ -81,11 +84,3 @@ public class Usuario {
 	
 	
 }
-
-
-
-// Composite
-/*PARA LA PARTE DE FILTROS DE LA APLICACION, EL OR, EL AND U LAS CATEGORIAS QUE EXCLUYA Y INCLUYA *
- * 
- * NECESITAMOS UN METODO FILTRAR/
- */

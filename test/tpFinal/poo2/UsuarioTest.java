@@ -9,6 +9,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import tpFinal.poo2.EstrategiaRecomendacion.EstrategiaFavoritos;
+import tpFinal.poo2.EstrategiaSemanal.EstrategiaSemanalFinDeSem;
+import tpFinal.poo2.EstrategiaSemanal.EstrategiaSemanalNinguna;
+
 class UsuarioTest {
 
 	Usuario usuarioA;
@@ -28,7 +32,7 @@ class UsuarioTest {
 	
     @BeforeEach
     public void setUp() {   //despues de 2026 rompe la restriccion
-        restriccionTemporal = new RestriccionTemporal(LocalDate.of(2020,12, 02), LocalDate.of(2026,02, 02),new EstrategiaSemanalSemCompleta());
+        restriccionTemporal = new RestriccionTemporal(LocalDate.of(2020,12, 02), LocalDate.of(2026,02, 02),new EstrategiaSemanalNinguna());
         categorias1 = new Categoria("Primera");
         categorias2 = new Categoria("Segunda");
         categorias = Arrays.asList(categorias1,categorias2);
@@ -61,8 +65,8 @@ class UsuarioTest {
         usuarioA.agregarDesafio(desafio);
         usuarioA.enviarMuestra(proyecto, muestra);
         
-        assertTrue(proyecto.muestras.contains(muestra));
-        assertEquals(usuarioA.getDesafiosDeUsuario().get(0).cantidadMuestras,1);
+        assertTrue(proyecto.getMuestras().contains(muestra));
+        assertEquals(usuarioA.getDesafiosDeUsuario().get(0).getCantidadMuestras(),1);
     } 
 	@Test
 	public void porcentajeCompletitudTest() throws Exception{
@@ -137,7 +141,7 @@ class UsuarioTest {
         List<Desafio> resultadoDesafio = Arrays.asList(desafioC, desafioD, desafioE, desafioA, desafioB);
         
         assertEquals(desafioDeUsuarioA.size(), 5);
-        desafioDeUsuarioA.stream().forEach(d -> System.out.println(d.cantidadMuestras));
+        desafioDeUsuarioA.stream().forEach(d -> System.out.println(d.getCantidadMuestras()));
         assertTrue(desafioDeUsuarioA.containsAll(resultadoDesafio));
         
     }
@@ -149,8 +153,8 @@ class UsuarioTest {
         usuarioA.agregarDesafio(desafioF);
         proyecto.agregarDesafio(desafioF);
         usuarioA.enviarMuestra(proyecto, muestra);
-        assertEquals(0,usuarioA.getDesafiosDeUsuario().get(0).cantidadMuestras);
-        assertEquals(proyecto.muestras.size(),1);
+        assertEquals(0,usuarioA.getDesafiosDeUsuario().get(0).getCantidadMuestras());
+        assertEquals(proyecto.getMuestras().size(),1);
         
     }
 

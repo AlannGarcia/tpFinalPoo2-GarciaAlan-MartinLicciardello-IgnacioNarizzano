@@ -3,9 +3,9 @@ package tpFinal.poo2;
 import java.time.LocalDate;
 
 public class Muestra {
-	Usuario usuario;
-	LocalDate fecha;
-	Ubicacion ubicacion;
+	private Usuario usuario;
+	private LocalDate fecha;
+	private Ubicacion ubicacion;
 	
 	public Muestra(Usuario usuario, LocalDate fecha, Ubicacion ubicacion) {
 		this.usuario = usuario;
@@ -15,6 +15,10 @@ public class Muestra {
 	
 	public boolean perteneceAlArea(Area a) {
 		return a.ubicacionPerteneceAArea(this.ubicacion);
+	}
+
+	public LocalDate getFecha() {
+		return fecha;
 	}
 	
 }

@@ -1,8 +1,8 @@
-package tpFinal.poo2;
+package tpFinal.poo2.EstrategiaSemanal;
 
 import java.time.LocalDate;
 
-public class EstrategiaSemanalSemCompleta extends EstrategiaSemanal{
+public class EstrategiaSemanalNinguna extends EstrategiaSemanal{
 
 	@Override
 	public boolean cumpleCon(LocalDate fecha) {

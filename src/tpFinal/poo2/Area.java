@@ -1,8 +1,8 @@
 package tpFinal.poo2;
 
 public class Area {
-	Ubicacion ubicacion;
-	double radio;
+	private Ubicacion ubicacion;
+	private double radio;
 	
 	public Area(Ubicacion ubicacion, double radio) {
 		super();

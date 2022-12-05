@@ -1,6 +1,10 @@
-package tpFinal.poo2;
+package tpFinal.poo2.EstrategiaRecomendacion;
 
 import java.util.List;
+
+import tpFinal.poo2.Desafio;
+import tpFinal.poo2.DesafioDeUsuario;
+import tpFinal.poo2.Preferencia;
 
 public class EstrategiaPreferenciasEnJuego extends EstrategiaRecomendacion{
 

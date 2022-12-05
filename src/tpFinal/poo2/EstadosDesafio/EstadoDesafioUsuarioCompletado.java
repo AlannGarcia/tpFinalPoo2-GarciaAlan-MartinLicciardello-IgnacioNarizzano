@@ -1,4 +1,7 @@
-package tpFinal.poo2;
+package tpFinal.poo2.EstadosDesafio;
+
+import tpFinal.poo2.DesafioDeUsuario;
+import tpFinal.poo2.Muestra;
 
 public class EstadoDesafioUsuarioCompletado extends EstadoDesafioUsuario{
 
@@ -9,13 +12,13 @@ public class EstadoDesafioUsuarioCompletado extends EstadoDesafioUsuario{
 	}
 	
 	@Override 
-	protected boolean completoDesafio() {
+	public boolean completoDesafio() {
 		return true;
 	}
 
 	@Override
 	
-	protected String fechaCompletado(DesafioDeUsuario desafioDeUsuario) {
+	public String fechaCompletado(DesafioDeUsuario desafioDeUsuario) {
 		return desafioDeUsuario.getFecha().toString();
 	}
 

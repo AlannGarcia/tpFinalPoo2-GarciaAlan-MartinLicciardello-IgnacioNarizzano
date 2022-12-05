@@ -1,8 +1,8 @@
 package tpFinal.poo2;
 
 public class Ubicacion {
-	int x;
-	int y;
+	private int x;
+	private int y;
 	
 	
 	public Ubicacion(int x, int y) {

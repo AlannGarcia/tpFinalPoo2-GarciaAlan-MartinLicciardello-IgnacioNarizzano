@@ -1,4 +1,7 @@
-package tpFinal.poo2;
+package tpFinal.poo2.EstadosDesafio;
+
+import tpFinal.poo2.DesafioDeUsuario;
+import tpFinal.poo2.Muestra;
 
 public class EstadoDesafioUsuarioActivo extends EstadoDesafioUsuario{
 

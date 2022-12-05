@@ -1,7 +1,7 @@
 package tpFinal.poo2;
 
 public enum Voto {
-	v("No voto"),v0("No gusto nada"),v1("mm"), v2("Safa"), v3 ("me"), v4("esta bueno"), v5("Gusto mucho");
+	V("No voto"),V0("No gusto nada"),V1("mm"), V2("Safa"), V3 ("me"), V4("esta bueno"), V5("Gusto mucho");
 		
 		String descripcion ;
 		
